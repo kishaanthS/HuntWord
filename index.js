@@ -9,9 +9,7 @@ start=document.getElementById("start");
 solve=document.getElementById("solve");
 check=document.getElementById("check");
 direction = ["row","col","diagonal"];
-let pause=1;
 let total_words;
-let rules;
 let point1,point2,point3,point4,heading;
 
 
@@ -98,7 +96,11 @@ let item_index = 0;
 
 document.addEventListener("click",function(e){
     if(start_flag==1){
-        alert("Start the game to hunt ! ! !");
+        
+        if(e.target.id=='start'){
+            alert('Wait 5 secs for the game to load ! ! !');
+        }
+        else alert("Start the game to hunt ! ! !");
     }
 })
 
@@ -227,7 +229,6 @@ start.addEventListener("click",function(){
                     total_words--;
                     let id = document.getElementById(inTrieOrNot);
                     id.style.textDecoration="line-through";
-
                     if(total_words==0){
                         alert("You hunt is a 100% success ! ! ! ");
                         let val = confirm("Do you want to play again ? ");
@@ -316,6 +317,7 @@ start.addEventListener("click",function(){
                     let val = confirm("Do you want to play again ? ");
                     if(val){
                         location.reload();
+                        start_flag = 0;
                     }
                 }
             }
@@ -471,7 +473,10 @@ async function getting_word_info(word){
     if(data[0].title === "No Definitions Found") wordgenerate();
     else{
         checkpos();
-        if(informationOfWords.length<=9) wordgenerate();
+        if(informationOfWords.length<=9) {
+            wordgenerate();
+            
+        }
         else{
             flag=1;
             return;
